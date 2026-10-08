@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Resultados — investigación de Nazareno Bergamo</title>
-  <meta name="description" content="Resultados de una investigación de futuros de índices y de arbitraje medido. No es una recomendación de inversión.">
+  <meta name="description" content="Resultados de una investigación de futuros de índices. No es una recomendación de inversión.">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,500;6..72,650&display=swap">
   <style>
     :root {
@@ -98,13 +98,9 @@
       <a class="linkbtn" href="informe.html">Leer el white paper</a>
       <a class="linkbtn ghost" href="https://github.com/nicolasnb2002/nicolasnb2002.github.io">Código en GitHub</a>
     </div>
-    <nav class="books" aria-label="Líneas">
-      <button type="button" id="b-quant" class="on">Quant<small>Futuros de índices</small></button>
-      <button type="button" id="b-arb">Arbitraje<small>Mediciones fechadas</small></button>
-    </nav>
     <section class="stats" id="stats"></section>
     <div class="tools">
-      <input id="q" type="search" placeholder="Buscar O2, funding, CEDEAR…" aria-label="Buscar">
+      <input id="q" type="search" placeholder="Buscar O2, ORB, walk-forward…" aria-label="Buscar">
     </div>
     <div class="filters" id="filters"></div>
     <div id="list"></div>
@@ -113,12 +109,11 @@
   <script src="data.js"></script>
   <script>
     const LABELS = { no: "No pasa", pasa: "Control ok", forward: "Forward", pendiente: "Pendiente", midiendo: "Midiendo", evento: "Evento" };
-    const FILTERS = ["todos", "no", "forward", "pendiente", "midiendo", "evento", "pasa"];
-    let book = "quant";
+    const FILTERS = ["todos", "no", "forward", "pendiente", "pasa"];
     let filter = "todos";
     const notes = JSON.parse(localStorage.getItem("axe-public-notes") || "{}");
 
-    function rows() { return window.SEED.rows.filter((r) => r.book === book); }
+    function rows() { return window.SEED.rows.filter((r) => r.book === "quant"); }
 
     function saveNote(id, text) {
       notes[id] = text;
@@ -127,18 +122,10 @@
 
     function renderStats() {
       const mine = rows();
-      const box = document.getElementById("stats");
-      if (book === "quant") {
-        box.innerHTML =
-          `<div class="stat"><span>Trials usados</span><b>${window.SEED.trialsUsed}</b></div>` +
-          `<div class="stat"><span>Tope del DSR en la nota</span><b>${window.SEED.trialsCap}</b></div>` +
-          `<div class="stat"><span>Filas en esta página</span><b>${mine.length}</b></div>`;
-      } else {
-        box.innerHTML =
-          `<div class="stat"><span>Capital de prueba</span><b style="font-size:1.3rem">${window.SEED.capital}</b></div>` +
-          `<div class="stat"><span>Mediciones</span><b>${mine.length}</b></div>` +
-          `<div class="stat"><span>Criterio</span><b style="font-size:1.15rem">Neto después de costos</b></div>`;
-      }
+      document.getElementById("stats").innerHTML =
+        `<div class="stat"><span>Trials usados</span><b>${window.SEED.trialsUsed}</b></div>` +
+        `<div class="stat"><span>Tope del DSR en la nota</span><b>${window.SEED.trialsCap}</b></div>` +
+        `<div class="stat"><span>Filas en esta página</span><b>${mine.length}</b></div>`;
     }
 
     function renderFilters() {
@@ -182,8 +169,6 @@
 
     function draw() { renderStats(); renderFilters(); renderList(); }
 
-    document.getElementById("b-quant").onclick = () => { book = "quant"; filter = "todos"; document.getElementById("b-quant").classList.add("on"); document.getElementById("b-arb").classList.remove("on"); draw(); };
-    document.getElementById("b-arb").onclick = () => { book = "arb"; filter = "todos"; document.getElementById("b-arb").classList.add("on"); document.getElementById("b-quant").classList.remove("on"); draw(); };
     document.getElementById("q").oninput = draw;
     document.getElementById("filters").onclick = (e) => {
       const b = e.target.closest("button");

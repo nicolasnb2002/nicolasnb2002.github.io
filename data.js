@@ -280,68 +280,8 @@ window.SEED = {
       "family": "Fase 3",
       "asOf": "2026-10-07",
       "verdict": "pendiente",
-      "metric": "14 trials escritos. No se corrió ninguno.",
-      "note": "Pre-registro v2.2, sha 79b893be. Universo A: futuros full-size. Universo B (BTC y ETH, 100 a 200 USD) solo si A pasa. Falta el OK a Databento, opción C, 3,65 USD, y la auditoría independiente al sello del holdout."
-    },
-    {
-      "id": "funding",
-      "book": "arb",
-      "name": "Funding spot–perp, BTC y ETH",
-      "family": "Funding",
-      "asOf": "2026-10-05",
-      "verdict": "no",
-      "metric": "−0,105% BTC y −0,091% ETH en 1 día.",
-      "note": "Nada cerca del piso WATCH (0,02% / 8h). El fee de ida y vuelta (0,10%) se come el neto. Bybit dio 403. ETH en 8h dio +0,003%, seis veces bajo el piso."
-    },
-    {
-      "id": "mep-usdt",
-      "book": "arb",
-      "name": "Rulo MEP → USDT → ARS",
-      "family": "MEP",
-      "asOf": "2026-10-07",
-      "verdict": "no",
-      "metric": "Bruto +3,71% el 5/10. La semana cerró en no.",
-      "note": "La medición de la semana: el rulo por apps locales queda en no. El gasto de tarjeta no lo habilita. Liquidación del bono en 24h."
-    },
-    {
-      "id": "ccl-mep",
-      "book": "arb",
-      "name": "Canje CCL → MEP",
-      "family": "MEP",
-      "asOf": "2026-10-05",
-      "verdict": "evento",
-      "metric": "4,43% bruto. CCL 1.606,10 / MEP venta 1.537,90.",
-      "note": "AL30, cierre de las 17. Es un evento, no una rueda diaria. Candidato número 2."
-    },
-    {
-      "id": "usdt-cross",
-      "book": "arb",
-      "name": "Cruce de USDT entre exchanges",
-      "family": "USDT",
-      "asOf": "2026-10-05",
-      "verdict": "no",
-      "metric": "+0,71% y depende de un libro fino.",
-      "note": "Binance a MEXC. MEXC ilíquido. En el resto el ask supera al bid."
-    },
-    {
-      "id": "tarjeta",
-      "book": "arb",
-      "name": "MEP local para el resumen en USD",
-      "family": "Tarjeta",
-      "asOf": "2026-10-07",
-      "verdict": "midiendo",
-      "metric": "USD 100 salen ~156.100 contra ~200.200 en pesos (−22%).",
-      "note": "Cocos, comisión ~1,1%. Es un ahorro de costo, no un arbitraje. No abre ni cierra el candado de 90 días. Pagar el saldo en USD evita la percepción del 30%."
-    },
-    {
-      "id": "cedear",
-      "book": "arb",
-      "name": "Paridad CEDEAR contra Nueva York, vía CCL",
-      "family": "CEDEAR",
-      "asOf": "2026-10-06",
-      "verdict": "midiendo",
-      "metric": "Sin número cerrado.",
-      "note": "Candidato número 3. Medición del 6 al 12/10, junto con basis de BTC y ETH. Plan B: si el plan A falla, esto no se opera solo."
+      "metric": "Trials de futuros escritos. No se corrió ninguno.",
+      "note": "Pre-registro v2.2, sha 79b893be. Futuros full-size, F1 a F8, con F3 como principal. Falta el OK a Databento, opción C, 3,65 USD, y la auditoría independiente al sello del holdout."
     }
   ]
 };

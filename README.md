@@ -1,4 +1,4 @@
-# Investigación — futuros de índices y arbitraje medido
+# Investigación — futuros de índices
 
 Sitio público de **Nazareno Bergamo**, Licenciatura en Finanzas, Universidad Siglo 21.
 
