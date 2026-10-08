@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>White paper — futuros de índices y arbitraje medido</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap">
+  <style>
+    :root { --ink: #1c1915; --muted: #5c564c; --line: #ddd6c8; --paper: #f7f4ee; --mark: #6e2e22; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #e7e1d6; color: var(--ink); font-family: "IBM Plex Sans", sans-serif; line-height: 1.55; }
+    article { max-width: 46rem; margin: 0 auto; background: var(--paper); padding: 2.2rem 1.3rem 4rem; }
+    h1, h2, h3 { font-family: Newsreader, Georgia, serif; font-weight: 550; line-height: 1.15; text-wrap: balance; }
+    h1 { font-size: clamp(2rem, 5vw, 2.8rem); margin: 0.2rem 0 0.4rem; }
+    h2 { font-size: 1.55rem; margin: 2rem 0 0.4rem; border-top: 1px solid var(--line); padding-top: 1.1rem; }
+    h3 { font-size: 1.2rem; margin: 1.3rem 0 0.3rem; }
+    p, li { font-size: 1.02rem; }
+    .kicker { letter-spacing: 0.04em; text-transform: uppercase; font-size: 0.78rem; color: var(--muted); margin: 0; }
+    .meta { color: var(--muted); }
+    .call { border-left: 3px solid var(--mark); padding: 0.2rem 0 0.2rem 0.9rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; margin: 0.8rem 0 1rem; }
+    th, td { text-align: left; vertical-align: top; padding: 0.45rem 0.4rem; border-bottom: 1px solid var(--line); }
+    th { color: var(--muted); font-weight: 500; }
+    caption { text-align: left; font-family: Newsreader, serif; font-size: 1.15rem; margin-bottom: 0.3rem; }
+    a { color: #1f4d3a; }
+    nav { margin: 1rem 0 0; }
+    @media print {
+      body { background: white; }
+      article { max-width: none; padding: 0; }
+      a { color: inherit; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+<article>
+  <p class="kicker">Informe de investigación para revisión académica</p>
+  <h1>¿Hay un edge intradía en futuros de índices de Estados Unidos, una vez descontado el azar de haber probado muchas estrategias?</h1>
+  <p class="meta">Nazareno Bergamo<br>Licenciatura en Finanzas, Universidad Siglo 21<br>8 de octubre de 2026<br>Versión pública. Los números de este texto coinciden con la <a href="index.html">libreta de resultados</a>.</p>
+
+  <p class="call"><strong>Qué se pide que se revise.</strong> El protocolo, las fuentes y la conclusión negativa. No se pide autorización para operar, ni se afirma que una estrategia sea rentable, ni se presenta este texto como una recomendación de inversión.</p>
+
+  <h2>1. Resumen</h2>
+  <p>Entre el 3 y el 8 de octubre de 2026 se buscó un resultado que no se explique por azar ni por haber elegido, después de mirar los datos, la variante que quedó mejor. El universo son futuros sobre índices de Estados Unidos, en el CME Globex: el E-mini S&amp;P 500 (ES), el E-mini Nasdaq-100 (NQ) y sus micros (MES, MNQ).</p>
+  <p>Se corrieron 302 configuraciones que cuentan para el presupuesto de pruebas. Ninguna pasó el criterio escrito en las notas: un Deflated Sharpe Ratio de al menos 0,95 y un resultado de entrenamiento que no contradiga al de validación. La variante menos mala, llamada O2 sobre NQ, gana en la ventana 2018–2021 (Sharpe 1,11, cerca de 213 dólares por trade) y aun así queda afuera: su Deflated Sharpe es 0,213 y en 2010–2017 el Sharpe es 0,06. Quedó congelada en una prueba hacia adelante, en papel, desde el 5 de octubre de 2026. No tiene plata asignada. Con unos 65 trades por año, un veredicto con muestra suficiente tarda cerca de un año y medio.</p>
+  <p>Una tercera fase, de tendencia más carry, está pre-registrada desde el 7 de octubre y no se corrió. Una línea aparte midió arbitrajes locales y de cripto entre el 5 y el 7 de octubre. Ningún spread repetible sobrevivió a los costos. Un canje entre CCL y MEP dio 4,43% bruto en una foto de cierre: es un evento, no una rueda. Comparar el dólar MEP con el pago del resumen de la tarjeta es un ahorro de costo, no un arbitraje.</p>
+
+  <h2>2. Pregunta y alcance</h2>
+  <p>La pregunta de la línea principal es estrecha a propósito. No es “¿conviene invertir en índices?”. Es: ¿alguna regla intradía, definida antes de mirar el tramo de validación, gana después de costos lo bastante como para que el resultado no sea el premio de haber probado cientos de reglas?</p>
+  <p>La respuesta que este informe sostiene es no, en el conjunto que ya se corrió. Esa frase es el resultado. No es una falla del informe.</p>
+  <p>Queda fuera, y se dice para que no se lea de más:</p>
+  <ul>
+    <li>No se evalúa una cuenta fondeada de Apex Trader Funding. Sus reglas vigentes prohíben la automatización y el bracket trading no direccional, y exigen estar flat antes de las 16:59 ET. Una simulación previa de la probabilidad de pasar una cuenta de 50.000 dólares no se distinguía de una estrategia sin edge. Apex no entra en el diseño.</li>
+    <li>No se elige broker en este texto. El modelo de costos usa un perfil llamado <em>ibkr_fixed</em> como referencia de investigación. La habilitación real de una cuenta y el tratamiento impositivo no forman parte del estudio.</li>
+    <li>No se publican claves, saldos de proveedores de datos ni el motor de backtest. Se publican las definiciones, las fuentes y los veredictos.</li>
+  </ul>
+
+  <h2>3. Por qué el Sharpe solo no alcanza</h2>
+  <p>El ratio de Sharpe mide exceso de retorno por unidad de volatilidad (Sharpe, 1994). En un backtest sirve como descripción. No sirve como prueba si uno se queda con la mejor de muchas pruebas. Bailey, Borwein, López de Prado y Zhu (2014) muestran que, con relativamente pocas configuraciones, es fácil fabricar un historial que se ve bien y no se repite. Bailey y López de Prado (2014) proponen el Deflated Sharpe Ratio: una probabilidad de que el Sharpe observado siga siendo positivo después de corregir por la cantidad de intentos y por rendimientos que no son normales.</p>
+  <p>En estas notas el umbral de aceptación es 0,95. Por debajo de eso, el resultado se archiva como no pasa, aunque el Sharpe de una ventana sea alto. O2-NQ es el ejemplo: Sharpe de validación 1,11 y Deflated Sharpe 0,213.</p>
+  <p>El otro control es temporal. Entrenar, validar y recién después mirar un holdout no arregla nada si el holdout ya se usó para descartar ideas. En este proyecto el tramo desde 2022 ya se miró. No puede citarse como confirmación limpia. Lo máximo que el historial podría haber dicho, si alguna regla hubiera pasado, es “pasa en la historia, pendiente de una prueba hacia adelante”. Ninguna llegó ahí.</p>
+
+  <h2>4. Datos</h2>
+  <p>La fuente de precios es Databento, dataset GLBX.MDP3, barras de un minuto, contrato continuo <em>.v.0</em>. ES y NQ desde junio de 2010. MES y MNQ desde mayo de 2019. La nota de trabajo registra un costo de descarga histórica de 61,19 dólares.</p>
+  <p>El contrato continuo no se tomó como verdad cerrada. El banco de pruebas tenía un error de gaps de roll: buscaba el gap por un par de símbolos cuyo año va en un solo dígito y, en 26 de 66 rolls desde 2020, aplicaba un gap de diez años antes. Se corrigió para buscar por fecha de roll y abortar si la fila no es única. Una segunda corrección, de anticipación, deja de usar la barra diaria del día del roll, porque esa barra cierra a las 20:00 ET, después de la apertura de las 09:30. El gap pasa a salir del cierre del día hábil anterior. Las dos correcciones se hashearon antes de volver a correr. No cambió ni un veredicto ni un trade de las cuatro variantes de la fase 2. El gap más cercano al umbral de O2 fue de 0,84 puntos en NQ.</p>
+  <p>Queda una limitación escrita, sin un tercer parche: en 97 rolls que cayeron en lunes, todos entre 2010 y 2022, la barra estricta es la del domingo y tiene poco volumen. Desde 2022 el continuo <em>.v.0</em> rola miércoles o jueves. El recolector de la prueba hacia adelante anota un aviso, y no frena, si esa barra cae en fin de semana, trae menos de 1.000 contratos en alguna pata o queda a más de un día hábil del roll.</p>
+  <p>La prueba hacia adelante usa la misma fuente, Databento <em>.v.0</em>, y no Yahoo Finance. Yahoo Finance queda solo como control cruzado. No se bajan sesiones parciales ni nada anterior al 5 de octubre de 2026. El costo cotizado para los cuatro contratos es de cerca de 0,10 dólares por semana. La rutina es los lunes a las 08:47, hora de Argentina. La próxima ventana, al escribir esto, es el lunes 12 de octubre.</p>
+
+  <h2>5. Costos que entran en el resultado</h2>
+  <p>Una estrategia que gana antes de costos y pierde después no es un edge. El perfil <em>ibkr_fixed</em> carga, por ida y vuelta, 4,48 dólares en ES y NQ y 1,22 dólares en MES y MNQ. Esa cifra junta comisión, fee de CME para no miembro y tasa NFA, más un tick de slippage por lado. Desde el 1 de julio de 2027 la nota prevé que la NFA suba y el ida y vuelta pase a 4,50 y 1,24 (<em>ibkr_fixed_nfa2027</em>). Son supuestos de investigación, no una constancia vigente del broker.</p>
+  <p>Las corridas con el doble de costos y las corridas en micros se usan como prueba de robustez. No suman al contador de trials. En la fase 3, todavía sin correr, los fees de CBOT, NYMEX y COMEX figuran como verificados en la nota de trabajo, y Binance entra con 0,1% por lado y una tensión al doble. Los micro de 2, 5 y 30 años quedan marcados como no ejecutables por liquidez.</p>
+
+  <h2>6. Protocolo</h2>
+  <p>El banco aplica dos familias de compuertas, F1–F2 y G1–G8. Este informe no reproduce el código de cada compuerta. Sí reproduce lo que las notas dicen que esas compuertas miran: ventaja contra dos nulos, Sharpe, Deflated Sharpe con la cantidad de trials, costos al doble, walk-forward, una meseta de parámetros vecinos, cantidad de trades y un chequeo de anticipación.</p>
+  <p>Los dos nulos son concretos. Uno da vuelta el signo del resultado bruto y vuelve a restar costos. El otro permuta de forma centrada. Si la regla no le gana a esos dos, el patrón encontrado no se distingue de reordenar el mismo resultado.</p>
+  <p>Cada corrida que cuenta entra en un ledger. El Deflated Sharpe usa, en la nota del 7 de octubre, un tope conservador N = 328. Van usados 302. La misma nota dice que quedan 24. La resta 328 − 302 da 26, no 24. Este informe no corrige esa diferencia: la deja escrita para que una revisión pregunte cuál es el N que va a entrar en la próxima corrida, antes de correrla. La fase 3 anota, por su lado, un N de compuerta igual a 318. Son tres cifras distintas en las notas y no están reconciliadas.</p>
+  <p>Las reglas nuevas se congelan con un hash SHA-256 antes de ver datos nuevos. La fase 2 hacia adelante tiene un manifiesto congelado el 4 de octubre a las 03:45, hora de Argentina, antes de la primera sesión del día 5. La fase 3 tiene un pre-registro v2.2 del 7 de octubre, con prefijo de hash 79b893be. Publicar el prefijo no reemplaza al archivo. Sirve para que una revisión pida el archivo y compruebe que no se reescribió después de mirar el resultado.</p>
+  <p>Las particiones son:</p>
+  <table>
+    <caption>Tabla 1. Particiones</caption>
+    <thead><tr><th>Tramo</th><th>Fechas</th><th>Estado al 8 de octubre de 2026</th></tr></thead>
+    <tbody>
+      <tr><td>Train</td><td>junio de 2010 a diciembre de 2017</td><td>Usado para construir</td></tr>
+      <tr><td>Valid</td><td>2018 a 2021</td><td>Ya mirado. No se puede volver a usar como sorpresa</td></tr>
+      <tr><td>Holdout</td><td>2022 en adelante</td><td>Ya usado. No es un test limpio</td></tr>
+      <tr><td>Forward</td><td>desde el 5 de octubre de 2026</td><td>Única ventana todavía no gastada. Solo O2, sin plata</td></tr>
+    </tbody>
+  </table>
+
+  <h2>7. Fase 0, el barrido</h2>
+  <p>El 3 de octubre se corrieron cinco estudios y 298 trials: 192 de baseline (reversión a la media contra el VWAP, más rupturas de rango de apertura), 42 filtros de tendencia, 20 de momentum intradía, 14 de eventos macro y 30 de timeframes. 192 + 42 + 20 + 14 + 30 = 298.</p>
+  <p>El veredicto de conjunto es que no apareció un edge intradía robusto. La reversión al VWAP no tiene edge bruto y pierde en el holdout. La ruptura de rango de apertura en ES y MES pierde dentro de la muestra. La menos mala, ORB60 en NQ y MNQ, depende del régimen de 2018 y 2021 y tiene un Deflated Sharpe lejos de 0,95. Una combinación de las dos familias, llamada COMBO en las notas, tampoco pasa.</p>
+  <p>El 4 de octubre se auditó la fase 0 y la fase 1. Hubo correcciones del modelo de ejecución y de costos, y tres bugs: el nulo de cambio de signo, un COMBO que miraba dentro de la barra, y un gap en la ruptura de apertura. Las conclusiones no cambiaron. Esos arreglos sumaron cero trials. Una reproducción independiente cerró 18 de 18 archivos de auditoría y 96 de 96 archivos de trades, byte a byte. “Pasa” acá quiere decir que la reproducción cierra. No quiere decir que la estrategia gane.</p>
+
+  <h2>8. Fase 2, cuatro reglas escritas antes</h2>
+  <p>La fase 2 no es otro barrido. Son cuatro trials pre-registrados. Los identificadores de parámetros en los CSV distinguen un ORB de baseline <em>or30</em> de un ORB elegido <em>or60</em>. La definición que usa el veredicto, en prosa, es esta:</p>
+  <ul>
+    <li><strong>O1.</strong> ORB60 de los dos lados, solo cuando el rango de apertura dividido por el ATR de 14 días cae en el tercil bajo.</li>
+    <li><strong>O2.</strong> ORB60 de un solo lado, a favor de un gap de apertura de al menos 0,3 veces ese ATR.</li>
+  </ul>
+  <p>Cada una se corre en NQ y en ES. Las cuatro no pasan. La reproducción independiente de esta fase cerró 84 de 84 archivos, también byte a byte, y confirmó los cuatro veredictos.</p>
+  <table>
+    <caption>Tabla 2. Fase 2, perfil ibkr_fixed, costos simples. Cifras de la nota de resultados del 7 de octubre.</caption>
+    <thead><tr><th>Variante</th><th>Valid 2018–2021</th><th>Train 2010–2017</th><th>DSR</th><th>Por qué no pasa</th></tr></thead>
+    <tbody>
+      <tr><td>O1-NQ</td><td>−63,9 USD por trade. Sharpe −0,45</td><td>Negativo. Sharpe −1,09 en el CSV</td><td>No se informa un pase</td><td>Negativa en los dos tramos</td></tr>
+      <tr><td>O1-ES</td><td>+9,6 USD por trade. Sharpe 0,11</td><td>Negativo. Sharpe −1,21 en el CSV</td><td>No se informa un pase</td><td>Sin edge. El Sharpe de validación sale de 2020–2021</td></tr>
+      <tr><td>O2-NQ</td><td>+213,2 USD por trade. Sharpe 1,11. p ≈ 0,009</td><td>Plano. Sharpe 0,06</td><td>0,213</td><td>Lejos de 0,95. La ganancia se concentra en largos y en alta volatilidad</td></tr>
+      <tr><td>O2-ES</td><td>+98,1 USD por trade. Sharpe 0,89</td><td>Negativo. Sharpe −0,63</td><td>0,013</td><td>El entrenamiento va al revés</td></tr>
+    </tbody>
+  </table>
+  <p>El CSV de resumen, con el mismo perfil y sin duplicar la corrida de costos dobles, da estos netos de validación, que cierran con la tabla anterior y no son otra estrategia: O1-NQ −20.706,5 dólares; O1-ES +3.147,5; O2-NQ +55.635,7; O2-ES +28.450,8.</p>
+  <p>Medido en unidades de riesgo, los largos de O2 en NQ ganan en los dos períodos (en entrenamiento, +0,16R, con un t de 3,2). Convertir O2 en una regla solo-largo sería un trial nuevo, elegido después de haber visto la validación. No se arma. Esa decisión importa más que el número: mirar el tramo de prueba y después recortar el lado que perdió es la forma clásica de publicar un Sharpe que no existía en la regla original.</p>
+
+  <h2>9. Walk-forward y configuraciones elegidas</h2>
+  <p>El walk-forward fuera de muestra, 2013–2021, no rescata a las familias. Un Sharpe positivo con un drawdown del tamaño del resultado tampoco es un pase.</p>
+  <table>
+    <caption>Tabla 3. Walk-forward fuera de muestra, 2013–2021, 2.261 días.</caption>
+    <thead><tr><th>Familia</th><th>Contrato</th><th>Neto</th><th>Sharpe anualizado</th><th>Drawdown cerrado</th></tr></thead>
+    <tbody>
+      <tr><td>Reversión al VWAP</td><td>ES</td><td>−8.392 USD</td><td>−0,43</td><td>−9.317 USD</td></tr>
+      <tr><td>Reversión al VWAP</td><td>NQ</td><td>+10.685 USD</td><td>0,24</td><td>−13.536 USD</td></tr>
+      <tr><td>Ruptura de apertura</td><td>ES</td><td>−81.130 USD</td><td>−0,85</td><td>−96.985 USD</td></tr>
+      <tr><td>Ruptura de apertura</td><td>NQ</td><td>+20.127 USD</td><td>0,14</td><td>−49.663 USD</td></tr>
+    </tbody>
+  </table>
+  <p>Las configuraciones marcadas como elegidas en el CSV, con un tick de slippage, muestran el mismo patrón. En ES, la reversión elegida (<em>k3.0_s1.5_t60</em>) tiene Sharpe −0,36 dentro de la muestra y −0,32 fuera. El ORB60 elegido pierde fuerte dentro de la muestra (Sharpe −0,79) y afuera queda en +0,12. En NQ, la reversión elegida da vuelta el signo: +0,14 adentro y −0,58 afuera. El ORB60 de NQ es el que más se presta a una lectura equivocada: Sharpe +0,16 adentro y +0,64 afuera, con un neto fuera de muestra de +135.570 dólares. Sigue sin pasar. Ese tramo ya no es un holdout virgen, el resultado depende del régimen ya visto, y el Deflated Sharpe de la regla pre-registrada queda en 0,213.</p>
+  <p>Los identificadores <em>k</em>, <em>s</em> y <em>t60</em> se citan como están en el archivo. Este informe no les asigna una definición que el archivo no escribe al lado.</p>
+
+  <h2>10. Qué quedó abierto, y qué no se corrió</h2>
+  <p><strong>Forward de O2.</strong> La regla se congeló tal cual el 5 de octubre de 2026. No se re-tunéa. O1 no se monitorea. Hasta que esa ventana junte muestra, O2 no está ni aprobada ni “casi aprobada”. Está en observación, sin capital.</p>
+  <p><strong>Anuncios de la Reserva Federal.</strong> Hay una regla candidata, F-ES y F-NQ: comprar a las 16:00 ET del día hábil anterior al anuncio y vender a las 14:00 ET del día del anuncio. Sigue sin codear y sin pre-registrar. El calendario tiene que ser el oficial, cerca de ocho eventos por año. Si se codea después de ver el próximo anuncio, deja de servir como prueba.</p>
+  <p><strong>Fase 3.</strong> Una tesis, dos universos, pre-registro v2.2 del 7 de octubre, 14 trials escritos y cero corridos. El universo A son futuros full-size diversificados desde 2010, largos y cortos: esa es la prueba. El universo B es BTC y ETH al contado en Binance, solo largo o en cash, sin apalancamiento, con un tamaño de investigación de 100 a 200 dólares. Si A falla, B no se opera. Los trials de futuros van de F1 a F8, con F3 como principal. Los de cripto van de C1 a C6, con C1 como principal. El holdout de cripto está sellado del 1 de octubre de 2025 al 30 de septiembre de 2026. Falta, antes de correr, aceptar el costo de datos de la opción C (3,65 dólares) y una auditoría del sello del holdout de futuros. Correrla sin ese orden convierte el pre-registro en un documento decorativo.</p>
+
+  <h2>11. Línea de arbitraje, con otro estándar</h2>
+  <p>Esta línea no usa Deflated Sharpe. Busca un spread que siga siendo positivo después de comisiones, de la diferencia entre bid y ask, del tiempo, del capital mínimo, del riesgo de que una pata no se ejecute, de impuestos y de la liquidez. Si el neto no cierra, se descarta. Las mediciones son de los días indicados. No son un promedio de un año ni un precio en vivo.</p>
+  <table>
+    <caption>Tabla 4. Mediciones del 5 al 7 de octubre de 2026.</caption>
+    <thead><tr><th>Qué se midió</th><th>Fecha</th><th>Número</th><th>Lectura</th></tr></thead>
+    <tbody>
+      <tr><td>Funding spot contra perpetuo, BTC y ETH, en Binance</td><td>5 de octubre</td><td>−0,105% BTC y −0,091% ETH en un día</td><td>No. El piso de observación era 0,02% cada 8 horas. El fee de ida y vuelta, 0,10%, se come el neto. Bybit no respondió (error 403). ETH en 8 horas dio +0,003%, seis veces debajo del piso.</td></tr>
+      <tr><td>Rulo MEP, luego USDT, luego pesos</td><td>5 al 7 de octubre</td><td>Bruto +3,71% el día 5</td><td>No, al cerrar la semana. La liquidación del bono es de 24 horas. El gasto de una tarjeta en dólares no alcanza para habilitar el rulo.</td></tr>
+      <tr><td>Canje CCL a MEP, bono AL30</td><td>5 de octubre, cierre de las 17</td><td>4,43% bruto. CCL 1.606,10 contra MEP de venta 1.537,90</td><td>Evento, no ciclo. Una foto de cierre no es una rueda que se repita.</td></tr>
+      <tr><td>Cruce de USDT entre exchanges</td><td>5 de octubre</td><td>+0,71% en un libro fino, Binance hacia MEXC</td><td>No. En el resto de los libros el ask supera al bid. El fee de red va encima.</td></tr>
+      <tr><td>MEP local para pagar un resumen en dólares</td><td>7 de octubre</td><td>100 dólares salen cerca de 156.100 pesos, contra cerca de 200.200 si se pagan en pesos</td><td>Ahorro de costo, cerca de 22%, más una comisión de alrededor de 1,1%. No es un arbitraje y no abre ni cierra un candado de 90 días. Pagar el saldo en dólares evita la percepción del 30%.</td></tr>
+      <tr><td>Paridad de CEDEAR contra Nueva York, vía CCL, y basis de BTC y ETH</td><td>Desde el 6 de octubre</td><td>Sin número cerrado</td><td>Sigue en medición hasta el 12 de octubre. Si la línea principal falla, esta no se opera sola.</td></tr>
+    </tbody>
+  </table>
+  <p>El capital máximo de una prueba con plata no está definido. Por eso esta línea, hoy, es una medición y no una operación.</p>
+
+  <h2>12. Limitaciones</h2>
+  <ul>
+    <li>El holdout histórico está gastado. Cualquier gráfico posterior a 2021 que se vea bien ya no es una sorpresa.</li>
+    <li>El presupuesto de trials tiene tres números sin conciliar: 302 usados, tope 328 con un “quedan 24” que no coincide con la resta, y un N de 318 en el pre-registro de la fase 3.</li>
+    <li>Las compuertas G1–G8 no se reproducen en este texto. Una revisión que quiera auditarlas tiene que pedir el banco, no conformarse con este resumen.</li>
+    <li>El modelo de costos es un supuesto. Si las comisiones reales son distintas, los netos chicos cambian de signo antes que los grandes. O2-NQ no se salva por eso: lo frena el Deflated Sharpe y el entrenamiento plano, no un redondeo de comisión.</li>
+    <li>La muestra hacia adelante todavía no existe. Decir hoy que O2 “viene bien” o “viene mal” sería inventar.</li>
+    <li>Las lecturas de arbitraje son de pocos días y de pantallas de mercado, no de un dataset institucional.</li>
+    <li>Los domingos de roll con poco volumen pueden ensuciar el gap estricto en la historia vieja. Desde 2022 el roll ya no cae en lunes, pero la historia de entrenamiento sí los tiene.</li>
+  </ul>
+
+  <h2>13. Conclusión</h2>
+  <p>En el conjunto pre-registrado y ya corrido no hay un edge intradía que sobreviva a la cantidad de pruebas. El mejor Sharpe de validación, 1,11 en O2-NQ, no pasa el Deflated Sharpe ni está acompañado por el entrenamiento. Recortarlo a solo-largo después de ver ese resultado quedaría inválido como prueba. La única evidencia que todavía puede cambiar el veredicto es la ventana hacia adelante, congelada, sin capital, y todavía vacía. La fase 3 no suma evidencia porque no se corrió. Los arbitrajes medidos no dejan un neto repetible; dejan una foto de canje y un ahorro de costo de tarjeta, que son otra cosa.</p>
+  <p>Eso es lo que una revisión puede aprobar: que la pregunta está bien cerrada, que las fuentes están nombradas, que el control por pruebas múltiples está explícito y que la conclusión negativa se sigue de la regla que se había fijado. No se sigue de este informe ninguna orden de comprar, vender o fondear una cuenta.</p>
+
+  <h2>14. Material para una revisión</h2>
+  <p>Cinco preguntas alcanzan para marcar este trabajo, sin necesidad de repetir los backtests:</p>
+  <ol>
+    <li>¿El umbral de 0,95 sobre el Deflated Sharpe está aceptado como criterio, o la revisión quiere otro?</li>
+    <li>¿Cuál de los tres N (302, 318, 328, y el “quedan 24”) entra en la próxima corrida? Hay que fijarlo antes de apretar el botón.</li>
+    <li>¿Se acepta que el holdout 2022+ ya no sirve como confirmación?</li>
+    <li>¿La fase 3 sigue bloqueada hasta la auditoría del sello, sí o no?</li>
+    <li>¿La línea de arbitraje se evalúa solo con neto después de costos, separada del Deflated Sharpe de los futuros?</li>
+  </ol>
+
+  <h2>Referencias</h2>
+  <p>Bailey, D. H., Borwein, J. M., López de Prado, M. y Zhu, Q. J. (2014). Pseudo-mathematics and financial charlatanism: The effects of backtest overfitting on out-of-sample performance. <em>Notices of the American Mathematical Society</em>, 61(5), 458–471.</p>
+  <p>Bailey, D. H. y López de Prado, M. (2014). The deflated Sharpe ratio: Correcting for selection bias, backtest overfitting, and non-normality. <em>The Journal of Portfolio Management</em>, 40(5), 94–107. <a href="https://doi.org/10.3905/jpm.2014.40.5.094">https://doi.org/10.3905/jpm.2014.40.5.094</a></p>
+  <p>Sharpe, W. F. (1994). The Sharpe ratio. <em>The Journal of Portfolio Management</em>, 21(1), 49–58.</p>
+  <p>Datos de mercado: Databento, GLBX.MDP3, barras de un minuto, continuo <em>.v.0</em>, según las notas de trabajo del 3 al 8 de octubre de 2026. Lecturas de arbitraje: Binance, BYMA (AL30, cierre del 5 de octubre de 2026) y pantallas de los exchanges nombrados en la tabla 4, en las fechas de esa tabla.</p>
+  <p class="meta">Documento preparado para que pueda leerlo alguien de la carrera. No sustituye un dictamen docente. Si una cátedra pide otro formato, se adapta el envase, no los números.</p>
+  <nav><a href="index.html">Volver a los resultados</a></nav>
+</article>
+</body>
+</html>
