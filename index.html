@@ -83,8 +83,26 @@
     .links { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1rem; }
     .linkbtn { display: inline-flex; align-items: center; padding: 0 0.95rem; background: var(--brass); color: var(--ink); text-decoration: none; }
     .ghost { background: transparent; color: var(--fg); border: 1px solid color-mix(in srgb, var(--muted) 45%, transparent); }
+    figure.chart { margin: 1.1rem 0 0; }
+    figure.chart figcaption { font-family: Newsreader, Georgia, serif; font-size: 1.25rem; margin: 0 0 0.35rem; }
+    .notefig { color: var(--muted); font-size: 0.88rem; margin: 0.35rem 0 0.8rem; }
+    .lane { display: grid; grid-template-columns: 6.6rem 1fr 4.2rem; gap: 0.35rem; align-items: center; margin: 0.18rem 0; font-size: 0.82rem; }
+    .bi { display: grid; grid-template-columns: 1fr 1fr; height: 0.65rem; background: #2a2722; position: relative; }
+    .bi::after { content: ""; position: absolute; left: 50%; top: -2px; bottom: -2px; width: 1px; background: var(--muted); }
+    .bi b { display: block; height: 100%; }
+    .bi .n { background: var(--fail); justify-self: end; }
+    .bi .p { background: var(--brass); }
+    .num { text-align: right; font-variant-numeric: tabular-nums; color: var(--fg); }
+    .meter { position: relative; height: 0.65rem; background: #2a2722; }
+    .meter i { display: block; height: 100%; background: var(--brass); min-width: 2px; }
+    .meter .thr { position: absolute; left: 95%; top: -4px; bottom: -4px; width: 2px; background: var(--fg); }
+    .scroll { overflow-x: auto; }
+    table.mini { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 0.4rem 0 0.2rem; }
+    table.mini th, table.mini td { text-align: left; padding: 0.35rem 0.3rem; border-bottom: 1px solid #2a2722; }
+    table.mini th { color: var(--muted); font-weight: 500; }
     @media (max-width: 640px) {
       .stats { grid-template-columns: 1fr; }
+      .lane { grid-template-columns: 5.4rem 1fr 3.4rem; }
     }
   </style>
 </head>
@@ -99,6 +117,50 @@
       <a class="linkbtn ghost" href="https://github.com/nicolasnb2002/nicolasnb2002.github.io">Código en GitHub</a>
     </div>
     <section class="stats" id="stats"></section>
+    <figure class="chart">
+      <figcaption>Sharpe de la fase 2</figcaption>
+      <div class="lane"><span>O1-NQ train</span><div class="bi"><b class="n" style="width:83.8%"></b><b class="p" style="width:0"></b></div><span class="num">−1,09</span></div>
+      <div class="lane"><span>O1-NQ valid</span><div class="bi"><b class="n" style="width:34.3%"></b><b class="p" style="width:0"></b></div><span class="num">−0,45</span></div>
+      <div class="lane"><span>O1-ES train</span><div class="bi"><b class="n" style="width:93.1%"></b><b class="p" style="width:0"></b></div><span class="num">−1,21</span></div>
+      <div class="lane"><span>O1-ES valid</span><div class="bi"><b class="n" style="width:0"></b><b class="p" style="width:8.8%"></b></div><span class="num">0,11</span></div>
+      <div class="lane"><span>O2-NQ train</span><div class="bi"><b class="n" style="width:0"></b><b class="p" style="width:4.5%"></b></div><span class="num">0,06</span></div>
+      <div class="lane"><span>O2-NQ valid</span><div class="bi"><b class="n" style="width:0"></b><b class="p" style="width:85.3%"></b></div><span class="num">1,11</span></div>
+      <div class="lane"><span>O2-ES train</span><div class="bi"><b class="n" style="width:48.1%"></b><b class="p" style="width:0"></b></div><span class="num">−0,63</span></div>
+      <div class="lane"><span>O2-ES valid</span><div class="bi"><b class="n" style="width:0"></b><b class="p" style="width:68.6%"></b></div><span class="num">0,89</span></div>
+      <p class="notefig">Cero en el medio. La barra de latón larga es O2-NQ en 2018–2021. El train de esa regla no la acompaña.</p>
+    </figure>
+    <figure class="chart">
+      <figcaption>Deflated Sharpe contra 0,95</figcaption>
+      <div class="lane"><span>O1-NQ</span><div class="meter"><i style="width:0.6%"></i><span class="thr"></span></div><span class="num">≈ 0</span></div>
+      <div class="lane"><span>O1-ES</span><div class="meter"><i style="width:0.6%"></i><span class="thr"></span></div><span class="num">≈ 0</span></div>
+      <div class="lane"><span>O2-NQ</span><div class="meter"><i style="width:21.3%"></i><span class="thr"></span></div><span class="num">0,213</span></div>
+      <div class="lane"><span>O2-ES</span><div class="meter"><i style="width:1.3%"></i><span class="thr"></span></div><span class="num">0,013</span></div>
+      <p class="notefig">La raya clara es 0,95. N = 328. Ninguna regla llega.</p>
+    </figure>
+    <figure class="chart">
+      <figcaption>Walk-forward, neto contra drawdown</figcaption>
+      <div class="lane"><span>MR ES neto</span><div class="bi"><b class="n" style="width:8.4%"></b><b class="p" style="width:0"></b></div><span class="num">−8.392</span></div>
+      <div class="lane"><span>MR ES DD</span><div class="bi"><b class="n" style="width:9.3%"></b><b class="p" style="width:0"></b></div><span class="num">−9.317</span></div>
+      <div class="lane"><span>MR NQ neto</span><div class="bi"><b class="n" style="width:0"></b><b class="p" style="width:10.7%"></b></div><span class="num">+10.685</span></div>
+      <div class="lane"><span>MR NQ DD</span><div class="bi"><b class="n" style="width:13.5%"></b><b class="p" style="width:0"></b></div><span class="num">−13.536</span></div>
+      <div class="lane"><span>ORB ES neto</span><div class="bi"><b class="n" style="width:81.1%"></b><b class="p" style="width:0"></b></div><span class="num">−81.130</span></div>
+      <div class="lane"><span>ORB ES DD</span><div class="bi"><b class="n" style="width:97.0%"></b><b class="p" style="width:0"></b></div><span class="num">−96.985</span></div>
+      <div class="lane"><span>ORB NQ neto</span><div class="bi"><b class="n" style="width:0"></b><b class="p" style="width:20.1%"></b></div><span class="num">+20.127</span></div>
+      <div class="lane"><span>ORB NQ DD</span><div class="bi"><b class="n" style="width:49.7%"></b><b class="p" style="width:0"></b></div><span class="num">−49.663</span></div>
+      <p class="notefig">Escala hasta 100.000 dólares, 2013–2021. Donde el neto es positivo, el drawdown de abajo es más grande.</p>
+    </figure>
+    <div class="scroll">
+      <table class="mini">
+        <caption class="notefig" style="caption-side:bottom">Fase 2, validación, costos simples. El neto de O2-NQ no es un pase.</caption>
+        <thead><tr><th>Regla</th><th>Trades</th><th>Aciertos</th><th>Neto</th><th>Sharpe</th><th>DSR</th></tr></thead>
+        <tbody>
+          <tr><td>O1-NQ</td><td>324</td><td>43,5%</td><td>−20.707</td><td>−0,45</td><td>≈ 0</td></tr>
+          <tr><td>O1-ES</td><td>327</td><td>43,1%</td><td>+3.148</td><td>0,11</td><td>≈ 0</td></tr>
+          <tr><td>O2-NQ</td><td>261</td><td>55,9%</td><td>+55.636</td><td>1,11</td><td>0,213</td></tr>
+          <tr><td>O2-ES</td><td>290</td><td>50,7%</td><td>+28.451</td><td>0,89</td><td>0,013</td></tr>
+        </tbody>
+      </table>
+    </div>
     <div class="tools">
       <input id="q" type="search" placeholder="Buscar O2, ORB, walk-forward…" aria-label="Buscar">
     </div>
