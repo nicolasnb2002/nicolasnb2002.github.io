@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Resultados — investigación de Nazareno Bergamo</title>
+  <meta name="description" content="Resultados de una investigación de futuros de índices y de arbitraje medido. No es una recomendación de inversión.">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,500;6..72,650&display=swap">
+  <style>
+    :root {
+      --bg: #141311;
+      --surface: #1e1c18;
+      --fg: #f3efe6;
+      --muted: #a39b8e;
+      --brass: #d4b483;
+      --ink: #1a140c;
+      --fail: #c46a55;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: "IBM Plex Sans", sans-serif;
+      line-height: 1.5;
+    }
+    main { max-width: 46rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+    h1, h2 { font-family: Newsreader, Georgia, serif; font-weight: 500; text-wrap: balance; }
+    h1 { font-size: clamp(2.2rem, 6vw, 3.2rem); margin: 0.15rem 0 0; }
+    a { color: var(--brass); }
+    .kicker { color: var(--brass); letter-spacing: 0.04em; margin: 0; }
+    .lead, .foot { color: var(--muted); }
+    .banner {
+      margin: 1.25rem 0 0;
+      padding: 0.85rem 1rem;
+      border: 1px solid color-mix(in srgb, var(--fail) 55%, transparent);
+      border-radius: 0.875rem;
+      color: var(--fg);
+    }
+    nav.books { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 1.25rem; }
+    button, .linkbtn {
+      font: inherit;
+      cursor: pointer;
+      min-height: 2.75rem;
+      border-radius: 0.875rem;
+      border: 0;
+    }
+    nav.books button { text-align: left; padding: 0.55rem 0.9rem; background: var(--surface); color: var(--fg); }
+    nav.books button.on { background: var(--brass); color: var(--ink); }
+    nav.books small { display: block; color: var(--muted); }
+    nav.books button.on small { color: color-mix(in srgb, var(--ink) 75%, transparent); }
+    .tools { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
+    input, select {
+      font: inherit;
+      color: var(--fg);
+      background: var(--surface);
+      border: 1px solid color-mix(in srgb, var(--muted) 45%, transparent);
+      border-radius: 0.875rem;
+      min-height: 2.75rem;
+      padding: 0 0.8rem;
+    }
+    input[type="search"] { flex: 1; min-width: 12rem; }
+    .filters { display: flex; gap: 0.4rem; overflow-x: auto; padding-bottom: 0.3rem; }
+    .filters button { border-radius: 999px; padding: 0 0.9rem; background: var(--surface); color: var(--fg); }
+    .filters button.on { background: var(--brass); color: var(--ink); }
+    article.card {
+      background: var(--surface);
+      border-radius: 0.875rem;
+      padding: 1rem 1rem 0.9rem;
+      margin: 0.7rem 0;
+    }
+    .top { display: flex; justify-content: space-between; gap: 0.8rem; align-items: flex-start; }
+    .family { color: var(--muted); margin: 0; font-size: 0.92rem; }
+    h2 { font-size: 1.55rem; margin: 0.15rem 0 0; }
+    .metric { margin: 0.7rem 0 0; }
+    .note { color: var(--muted); margin: 0.4rem 0 0; }
+    .no { color: var(--fail); }
+    .ok { color: var(--brass); }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 1rem; }
+    .stat { background: var(--surface); border-radius: 0.875rem; padding: 0.8rem; }
+    .stat b { display: block; font-family: Newsreader, serif; font-size: 1.8rem; color: var(--brass); font-weight: 500; }
+    .stat span { color: var(--muted); font-size: 0.9rem; }
+    .links { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1rem; }
+    .linkbtn { display: inline-flex; align-items: center; padding: 0 0.95rem; background: var(--brass); color: var(--ink); text-decoration: none; }
+    .ghost { background: transparent; color: var(--fg); border: 1px solid color-mix(in srgb, var(--muted) 45%, transparent); }
+    @media (max-width: 640px) {
+      .stats { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="kicker">Nazareno Bergamo · Licenciatura en Finanzas, Universidad Siglo 21</p>
+    <h1>Resultados</h1>
+    <p class="lead">Lo que ya se midió, con fecha. Tocá una fila para leer la nota. Lo que anotes queda solo en este navegador.</p>
+    <p class="banner">Investigación. No es una recomendación de inversión y no es una instrucción para operar. Ninguna estrategia de esta página pasó el criterio de aceptación.</p>
+    <div class="links">
+      <a class="linkbtn" href="informe.html">Leer el white paper</a>
+      <a class="linkbtn ghost" href="https://github.com/nicolasnb2002/nicolasnb2002.github.io">Código en GitHub</a>
+    </div>
+    <nav class="books" aria-label="Líneas">
+      <button type="button" id="b-quant" class="on">Quant<small>Futuros de índices</small></button>
+      <button type="button" id="b-arb">Arbitraje<small>Mediciones fechadas</small></button>
+    </nav>
+    <section class="stats" id="stats"></section>
+    <div class="tools">
+      <input id="q" type="search" placeholder="Buscar O2, funding, CEDEAR…" aria-label="Buscar">
+    </div>
+    <div class="filters" id="filters"></div>
+    <div id="list"></div>
+    <p class="foot">Semilla al 8 de octubre de 2026. Fuentes y método, en el informe. El holdout de 2022 en adelante ya se usó y no cuenta como prueba limpia.</p>
+  </main>
+  <script src="data.js"></script>
+  <script>
+    const LABELS = { no: "No pasa", pasa: "Control ok", forward: "Forward", pendiente: "Pendiente", midiendo: "Midiendo", evento: "Evento" };
+    const FILTERS = ["todos", "no", "forward", "pendiente", "midiendo", "evento", "pasa"];
+    let book = "quant";
+    let filter = "todos";
+    const notes = JSON.parse(localStorage.getItem("axe-public-notes") || "{}");
+
+    function rows() { return window.SEED.rows.filter((r) => r.book === book); }
+
+    function saveNote(id, text) {
+      notes[id] = text;
+      localStorage.setItem("axe-public-notes", JSON.stringify(notes));
+    }
+
+    function renderStats() {
+      const mine = rows();
+      const box = document.getElementById("stats");
+      if (book === "quant") {
+        box.innerHTML =
+          `<div class="stat"><span>Trials usados</span><b>${window.SEED.trialsUsed}</b></div>` +
+          `<div class="stat"><span>Tope del DSR en la nota</span><b>${window.SEED.trialsCap}</b></div>` +
+          `<div class="stat"><span>Filas en esta página</span><b>${mine.length}</b></div>`;
+      } else {
+        box.innerHTML =
+          `<div class="stat"><span>Capital de prueba</span><b style="font-size:1.3rem">${window.SEED.capital}</b></div>` +
+          `<div class="stat"><span>Mediciones</span><b>${mine.length}</b></div>` +
+          `<div class="stat"><span>Criterio</span><b style="font-size:1.15rem">Neto después de costos</b></div>`;
+      }
+    }
+
+    function renderFilters() {
+      const mine = rows();
+      document.getElementById("filters").innerHTML = FILTERS.map((f) => {
+        const n = f === "todos" ? mine.length : mine.filter((r) => r.verdict === f).length;
+        if (f !== "todos" && n === 0) return "";
+        const label = f === "todos" ? "Todos" : LABELS[f];
+        return `<button type="button" data-f="${f}" class="${filter === f ? "on" : ""}">${label} ${n}</button>`;
+      }).join("");
+    }
+
+    function renderList() {
+      const q = document.getElementById("q").value.trim().toLowerCase();
+      const visible = rows()
+        .filter((r) => filter === "todos" || r.verdict === filter)
+        .filter((r) => !q || (r.name + r.family + r.metric + r.note).toLowerCase().includes(q))
+        .sort((a, b) => (a.asOf < b.asOf ? 1 : a.asOf > b.asOf ? -1 : a.name.localeCompare(b.name, "es")));
+      document.getElementById("list").innerHTML = visible.map((r) => {
+        const tone = r.verdict === "no" ? "no" : r.verdict === "pasa" || r.verdict === "forward" ? "ok" : "";
+        const extra = notes[r.id] ? `<p class="note">Nota en este navegador: ${escapeHtml(notes[r.id])}</p>` : "";
+        return `<article class="card">
+          <div class="top">
+            <div><p class="family">${escapeHtml(r.family)} · ${escapeHtml(r.asOf)}</p><h2>${escapeHtml(r.name)}</h2></div>
+            <strong class="${tone}">${LABELS[r.verdict]}</strong>
+          </div>
+          <p class="metric">${escapeHtml(r.metric)}</p>
+          <p class="note">${escapeHtml(r.note)}</p>
+          ${extra}
+          <label class="note">Anotación local
+            <input data-id="${r.id}" value="${escapeAttr(notes[r.id] || "")}" placeholder="Solo en este navegador">
+          </label>
+        </article>`;
+      }).join("") || `<p class="card">Nada con ese filtro.</p>`;
+    }
+
+    function escapeHtml(s) {
+      return String(s).replace(/&/g, "\u0026amp;").replace(/</g, "\u0026lt;").replace(/>/g, "\u0026gt;");
+    }
+    function escapeAttr(s) { return escapeHtml(s).replace(/"/g, "\u0026quot;"); }
+
+    function draw() { renderStats(); renderFilters(); renderList(); }
+
+    document.getElementById("b-quant").onclick = () => { book = "quant"; filter = "todos"; document.getElementById("b-quant").classList.add("on"); document.getElementById("b-arb").classList.remove("on"); draw(); };
+    document.getElementById("b-arb").onclick = () => { book = "arb"; filter = "todos"; document.getElementById("b-arb").classList.add("on"); document.getElementById("b-quant").classList.remove("on"); draw(); };
+    document.getElementById("q").oninput = draw;
+    document.getElementById("filters").onclick = (e) => {
+      const b = e.target.closest("button");
+      if (!b) return;
+      filter = b.dataset.f;
+      draw();
+    };
+    document.getElementById("list").onchange = (e) => {
+      if (e.target.dataset.id) saveNote(e.target.dataset.id, e.target.value);
+    };
+    draw();
+  </script>
+</body>
+</html>
