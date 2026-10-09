@@ -45,6 +45,24 @@
       article { max-width: none; padding: 0; }
       a { color: inherit; text-decoration: none; }
       figure.chart { page-break-inside: avoid; }
+      .exec { background: white; break-inside: avoid; }
+    }
+    .exec {
+      border: 1px solid var(--line);
+      padding: 0.95rem 1.05rem 1.05rem;
+      margin: 1.15rem 0 1.35rem;
+      background: #efeae1;
+    }
+    .exec h2 {
+      border-top: none;
+      padding-top: 0;
+      margin: 0 0 0.55rem;
+      font-size: 1.35rem;
+    }
+    .exec p { margin: 0.45rem 0; }
+    .exec p:last-child { margin-bottom: 0; }
+    @media (max-width: 40rem) {
+      .exec { padding: 0.85rem 0.9rem; }
     }
   </style>
 </head>
@@ -53,6 +71,13 @@
   <p class="kicker">Informe de investigación para revisión académica</p>
   <h1>¿Hay un edge intradía en futuros de índices de Estados Unidos, una vez descontado el azar de haber probado muchas estrategias?</h1>
   <p class="meta">Nazareno Bergamo<br>Licenciatura en Finanzas, Universidad Siglo 21<br>8 de octubre de 2026 (revisado el 9 de octubre de 2026, con figuras y el inventario completo de pruebas)<br>Versión pública. Los números de este texto coinciden con la <a href="index.html">libreta de resultados</a>.</p>
+
+  <aside class="exec" aria-labelledby="resumen-ejecutivo">
+    <h2 id="resumen-ejecutivo">Resumen ejecutivo</h2>
+    <p><strong>Pregunta.</strong> ¿Existe un edge intradía en futuros de índices de Estados Unidos (ES, NQ y micros) que sobreviva a costos y al azar de haber probado muchas reglas, cuando la regla se define antes de mirar el tramo de validación?</p>
+    <p><strong>Método.</strong> Protocolo con pre-registro (hash SHA-256 antes de datos nuevos), ledger de trials con N acumulado, Deflated Sharpe Ratio (umbral 0,95) calculado con ese N, costos al doble como robustez, dos nulos (cambio de signo y permutación centrada) y walk-forward. Las particiones train / valid / holdout y la única ventana forward no gastada quedaron fijadas de antemano.</p>
+    <p><strong>Conclusión.</strong> Ninguna configuración pasó. La menos mala, O2-NQ, alcanza Sharpe 1,11 en validación (2018–2021) y Deflated Sharpe 0,213; en entrenamiento (2010–2017) el Sharpe es 0,06. Quedó congelada en una prueba hacia adelante, en papel, desde el 5 de octubre de 2026, sin capital asignado. La fase 3 (tendencia más carry) está pre-registrada; por ahora es solo diseño y no se corrió.</p>
+  </aside>
 
   <p class="call"><strong>Qué se pide que se revise.</strong> El protocolo, las fuentes y la conclusión negativa. No se pide autorización para operar, ni se afirma que una estrategia sea rentable, ni se presenta este texto como una recomendación de inversión.</p>
 
